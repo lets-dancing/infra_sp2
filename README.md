@@ -35,7 +35,19 @@ git clone https://github.com/netshy/api_yamdb/
 ```
 docker-compose up --build
 ```
-##### Автоматически были созданы миграции для приложения и произошла миграция в БД. Загружены тестовые данные.
+##### Подготовка к запуску
+1) Выполните миграции:
+```
+docker-compose exec web python manage.py migrate
+```
+2) Создать суперпользователя (для раздачи прав админам):
+```
+docker-compose exec web python manage.py createsuperuser
+```
+3) Команда для заполнения базы данных:
+```
+docker-compose exec web python manage.py loaddata fixtures.json
+```
 
 ###### Ваш проект запустился на http://127.0.0.1/
 
@@ -81,3 +93,10 @@ request = requests.post(url, data=data, headers=headers)
  "pub_date": "2020-08-20T14:15:22Z"
 }
 ```
+***Над проектом работали:***
+* Александр Пименов | Github:https://github.com/Lets-dancing | Тимлид, разработка части, касающейся управления пользователями (Auth и Users): система регистрации и аутентификации, права доступа, работа с токеном, система подтверждения через e-mail
+* Степан Солнышкин | Github:https://github.com/Stepan-Solnyshkin| Разработчик, написание части с категориями (Categories), жанрами (Genres) и произведениями (Titles): моделями, представлениями и эндпойнтами для них.
+* Дмитрий Пермяков | Github:https://github.com/taren4ik | Разработчик, написание части с отзывами (Review) и комментариями (Comments): описание модели, представления, настройка эндпойнтов, определение прав доступа для запросов. Рейтинги произведений.
+
+***Настройку docker выполнил:***
+* Александр Пименов | Github:https://github.com/Lets-dancing |
